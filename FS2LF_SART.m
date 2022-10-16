@@ -1,5 +1,6 @@
 clear; clc; close
-%% 相关参数设置
+%% 相关参数设置----------------------------------
+% Setting some parameters-----------------------
 angRes                = 9;  % angular resolution
 h                     = 512;
 w                     = 512;
@@ -10,7 +11,8 @@ dispmax               = 2.0;
 d                     = 0.2;
 Ang                   = dispmin:d:dispmax; % 聚焦堆栈对应的视差层
 nbFS                  = length(Ang);% 聚焦堆栈的个数
-%% 读取光场数据
+%% 读取光场数据---------------------------------
+% Load Light Field data ------------------------
 path = '.\town\';
 files = dir(fullfile( path,'*.png'));
 for u = 1 : angRes
@@ -55,7 +57,7 @@ for ite = 1: maxIte%迭代次数
     IdxAng = randperm(nbFS);%随机角度
 %     IdxAng = 1:nbFS;%按顺序
     for k = 1: nbFS
-    % 正投影--------------------------------------------------
+    % 正投影 Projection ---------------------------------------
         alpha = Ang(IdxAng(k));
         temp = zeros(h,w);
         for u = 1:angRes
